@@ -10,9 +10,10 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@element-plus/theme-chalk": "^2.2.16",
     "axios": "^1.8.2",
     "echarts": "^5.6.0",
-    "element-plus": "^2.9.6",
+    "element-plus": "^2.9.7",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "xlsx": "^0.18.5"

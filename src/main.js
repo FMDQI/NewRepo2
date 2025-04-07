@@ -1,15 +1,11 @@
-﻿import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue'; // 引入图标库
+﻿import { createApp } from 'vue'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css' // 引入默认主题
+import App from './App.vue'
+import router from './router';  // 确保引入 router/index.js 文件
 
-const app = createApp(App);
+const app = createApp(App)
+app.use(ElementPlus)
+app.use(router)  // 确保应用路由
+app.mount('#app')
 
-// 注册所有图标
-for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-    app.component(key, component);
-}
-
-app.use(router).use(ElementPlus).mount('#app'); // 移除了 .use(store)
