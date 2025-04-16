@@ -191,7 +191,17 @@
 <style scoped>
     .dashboard-card {
         margin-bottom: 20px;
+        background: transparent !important;
     }
+
+    .dashboard-card .el-card__body {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 8px;
+  border: 1px solid rgba(103, 194, 58, 0.25);
+  box-shadow: 0 8px 32px rgba(103, 194, 58, 0.2);
+}
 
     h2 {
         margin-bottom: 20px;
@@ -199,5 +209,28 @@
 
     h3 {
         margin-bottom: 10px;
+    }
+
+    /* 增强表格毛玻璃效果 */
+    .dashboard-card .el-table,
+    .dashboard-card .el-table__expanded-cell {
+      background: rgba(255, 255, 255, 0.1) !important;
+      backdrop-filter: blur(20px) saturate(180%);
+      will-change: transform; /* 优化模糊效果性能 */
+    }
+    
+    .dashboard-card .el-table th {
+      background: rgba(255, 255, 255, 0.15) !important;
+      backdrop-filter: blur(10px);
+    }
+    
+    .dashboard-card .el-table td {
+      background: transparent !important;
+    }
+    
+    /* 添加表格边框效果 */
+    .dashboard-card .el-table--border::after,
+    .dashboard-card .el-table--group::after {
+      background: rgba(103, 194, 58, 0.2);
     }
 </style>

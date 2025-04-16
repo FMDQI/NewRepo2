@@ -1,192 +1,272 @@
 ﻿<template>
-    <el-container style="height: 100vh;">
-        <!-- 头部 -->
-        <el-header class="header">
-            <div class="header-content">
-                <span class="app-title">智能仓储系统</span>
-                <div class="user-info">
-                    <!-- 添加导航栏隐藏按钮 -->
-                    <el-button type="text" class="toggle-nav-btn" @click="toggleNav">
-                        <i :class="isNavVisible? 'el-icon-s-fold' : 'el-icon-s-unfold'"></i>
-                    </el-button>
-                    <span>欢迎，{{ username }}</span>
-                    <el-button type="primary" @click="handleLogout">退出</el-button>
-                </div>
-            </div>
-        </el-header>
+  <el-container class="eco-container">
+    <!-- 头部 -->
+    <el-header class="eco-header">
+      <div class="header-content">
+        <el-button 
+          class="nav-toggle"
+          @click="toggleNav"
+          :icon="isNavVisible ? 'el-icon-close' : 'el-icon-s-operation'"  
+          circle
+        />
+        <h1 class="app-title">智能仓储系统</h1>
+        <div class="user-panel">
+          <span class="welcome-msg">欢迎，{{ username }} </span>
+          <el-button 
+            type="success" 
+            plain 
+            @click="handleLogout">
+            退出登录
+          </el-button>
+        </div>
+      </div>
+    </el-header>
 
-        <el-container>
-            <!-- 侧边栏 -->
-            <el-aside class="nav-menu"
-                      v-show="isNavVisible"
-                      :style="{ width: isNavVisible? '200px' : '0' }">
-                <el-menu mode="vertical"
-                         :default-active="activeMenu"
-                         @select="handleMenuSelect"
-                         class="custom-menu">
-                    <el-menu-item index="/dashboard">
-                        <i class="el-icon-s-data"></i>
-                        <span slot="title">信息仪表盘</span>
-                    </el-menu-item>
-                    <el-menu-item index="/inventory">
-                        <i class="el-icon-s-goods"></i>
-                        <span slot="title">库存管理</span>
-                    </el-menu-item>
-                    <el-menu-item index="/replenishment">
-                        <i class="el-icon-s-check"></i>
-                        <span slot="title">补货服务</span>
-                    </el-menu-item>
-                    <el-menu-item index="/recycling">
-                        <i class="el-icon-refresh"></i>
-                        <span slot="title">回收管理</span>
-                    </el-menu-item>
-                    <el-menu-item index="/normal-items">
-                        <i class="el-icon-box"></i>
-                        <span slot="title">库存物品管理</span>
-                    </el-menu-item>
-                </el-menu>
-            </el-aside>
+    <el-container>
+      <!-- 导航栏 -->
+      <el-aside class="eco-aside" :width="isNavVisible ? '200px' : '0'">
+        <el-menu
+          :default-active="activeMenu"
+          @select="handleMenuSelect"
+          class="glass-nav"
+          :collapse="!isNavVisible">
+          <el-menu-item index="/dashboard">
+            <i class="el-icon-s-data"></i> <!-- 官方数据仪表图标 -->
+            <span>信息仪表盘</span>
+          </el-menu-item>
+          <el-menu-item index="/inventory">
+            <i class="el-icon-office-building"></i> <!-- 仓库建筑图标 -->
+            <span>库存管理</span>
+          </el-menu-item>
+          <el-menu-item index="/replenishment">
+            <i class="el-icon-truck"></i> <!-- 官方卡车图标 -->
+            <span>补货服务</span>
+          </el-menu-item>
+          <el-menu-item index="/recycling">
+            <i class="el-icon-delete-solid"></i> <!-- 实心删除图标 -->
+            <span>回收管理</span>
+          </el-menu-item>
+          <el-menu-item index="/normal-items">
+            <i class="el-icon-box"></i> <!-- 官方盒子图标 -->
+            <span>物品管理</span>
+          </el-menu-item>
+        </el-menu>
+      </el-aside>
 
-            <!-- 主体内容 -->
-            <el-main class="main-content"
-                     :style="{
-                        marginLeft: isNavVisible? '200px' : '0',
-                        width: isNavVisible? 'calc((100% - 200px) * 0.6666)' : 'calc(100% * 0.6666)'
-                    }">
-                <router-view />
-            </el-main>
-        </el-container>
-
-        <!-- 底部 -->
-        <el-footer class="footer">
-            <div class="footer-content">
-                &copy; 2025 warehouse_forntend. All rights reserved.
-            </div>
-        </el-footer>
+      <!-- 主内容区 -->
+      <el-main class="eco-main">
+        <router-view class="glass-content" />
+      </el-main>
     </el-container>
+  </el-container>
 </template>
 
+<style scoped>
+.eco-header {
+  /* 修改为更明显的绿色渐变 */
+  background: linear-gradient(90deg, 
+    rgba(1, 136, 33, 0.927) 0%, 
+    rgba(240, 249, 235, 0.95) 100%
+  ) !important;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(103, 194, 58, 0.1);
+}
+
+.eco-aside {
+    background: rgba(245, 255, 240, 0.96) !important;
+    backdrop-filter: blur(8px);
+}
+/* 菜单项特效（不改变布局） */
+.glass-nav >>> .el-menu-item {
+  transition: all 0.3s ease;
+}
+.glass-nav >>> .el-menu-item:hover {
+  background: rgba(225, 243, 216, 0.6) !important;
+  box-shadow: 1px 1px 4px rgba(103, 194, 58, 0.1);
+}
+
+.glass-nav >>> .el-menu-item.is-active {
+  background: linear-gradient(90deg, 
+    rgba(225, 243, 216, 0.8) 0%,
+    rgba(240, 249, 235, 0.6) 100%
+  ) !important;
+}
+
+.eco-main {
+  margin-top: 60px;
+  transition: all 0.3s;
+  width: 66.66%;
+  /* 新增定位方式 */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+}
+
+/* 导航栏展开时调整 */
+.eco-aside[width="200px"] + .eco-main {
+  width: calc(66.66% - 100px);
+  left: calc(50% + 100px);
+}
+
+/* 头部内容布局调整 */
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* 标题颜色调整 */
+.app-title {
+  color: #0e0c01;
+  /* 添加文字阴影增强对比 */
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+/* 调整菜单项间距和图标大小 */
+.glass-nav >>> .el-menu-item {
+  padding: 0 25px !important;
+  height: 50px;
+  line-height: 50px;
+  margin: 8px 0;
+}
+
+.glass-nav >>> .el-menu-item i {
+  margin-right: 15px;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+/* 导航按钮样式优化 */
+.nav-toggle {
+  font-size: 26px;
+  padding: 14px;
+  transition: transform 0.3s;
+}
+.nav-toggle:hover {
+  transform: rotate(180deg);
+}
+</style>
+
 <script>
-    export default {
-        data() {
-            return {
-                activeMenu: '/dashboard',
-                username: localStorage.getItem('role') || '用户',
-                isNavVisible: true, // 控制导航栏显示状态
-            };
-        },
-        methods: {
-            handleMenuSelect(index) {
-                this.$router.push(index);
-            },
-            handleLogout() {
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('user_id');
-                localStorage.removeItem('role');
-                localStorage.removeItem('username');
-                this.$router.push('/login');
-            },
-            toggleNav() {
-                this.isNavVisible = !this.isNavVisible; // 切换导航栏显示状态
-            },
-        },
-        watch: {
-            $route(to) {
-                this.activeMenu = to.path;
-            },
-        },
-        mounted() {
-            this.activeMenu = this.$route.path;
-        },
-    };
+export default {
+  data() {
+    return {
+      isNavVisible: true,
+      activeMenu: '/dashboard',
+      username: localStorage.getItem('username') || '管理员'
+    }
+  },
+  methods: {
+    toggleNav() {
+      this.isNavVisible = !this.isNavVisible
+    },
+    handleMenuSelect(index) {
+      this.$router.push(index)
+    },
+    handleLogout() {
+      localStorage.clear()
+      this.$router.push('/login')
+    }
+  },
+  watch: {
+    $route(to) {
+      this.activeMenu = to.path
+    }
+  },
+  mounted() {
+    this.activeMenu = this.$route.path
+  }
+}
 </script>
 
+<style>
+/* 在全局或组件内添加 */
+@import url('//unpkg.com/element-ui/lib/theme-chalk/icon.css');
+
+.glass-nav i {
+  font-family: element-icons !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+}
+</style>
+
 <style scoped>
-    /* 头部 */
-    .header {
-        background-color: #34495e;
-        color: white;
-        padding: 0;
-        height: 64px;
-        position: fixed;
-        top: 0;
-        width: 100%;
-        z-index: 10;
-    }
 
-    .header-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 20px;
-        position: relative; /* 添加相对定位 */
-    }
+/* 用户面板间距调整 */
+.user-panel {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* 新增间距 */
+}
 
-    .app-title {
-        font-size: 22px;
-        font-weight: bold;
-        color: white;
-        margin-left: 40px; /* 为隐藏按钮留出空间 */
-    }
+.welcome-msg {
+  margin-right: 10px; /* 文字与按钮间距 */
+}
 
-    /* 隐藏按钮 */
-    .toggle-nav-btn {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 11; /* 确保按钮在头部之上 */
-        color: white;
-    }
+/* 修改卡片容器为透明 */
+.glass-content {
+  background: transparent !important;
+  backdrop-filter: none;
+}
 
-    /* 导航菜单 - 毛玻璃效果 */
-    .nav-menu {
-        background-color: rgba(255, 255, 255, 0.3); /* 半透明白色背景 */
-        border: 1px solid rgba(255, 255, 255, 0.2); /* 半透明白色边框 */
-        height: calc(100vh - 64px);
-        position: fixed;
-        top: 64px;
-        overflow-y: auto;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* 添加阴影 */
-        backdrop-filter: blur(10px); /* 模糊效果 */
-        -webkit-backdrop-filter: blur(10px); /* 兼容 Safari */
-        border-radius: 8px; /* 圆角效果 */
-        transition: width 0.3s ease; /* 添加宽度过渡效果 */
-    }
+/* 卡片内容区域毛玻璃效果 */
+.glass-content .el-card__body {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border-radius: 8px;
+}
 
-    /* 导航菜单项 */
-    .el-menu-item {
-        color: #000000 !important; /* 字体颜色改为黑色 */
-        font-size: 16px;
-        transition: background 0.3s, color 0.3s;
-    }
+/* 卡片整体样式调整 */
+.glass-content .el-card {
+  background: transparent !important;
+  border: 1px solid rgba(103, 194, 58, 0.2);
+  box-shadow: 0 8px 32px rgba(103, 194, 58, 0.15);
+}
 
-        /* 悬停和选中状态 */
-        .el-menu-item:hover,
-        .el-menu-item.is-active {
-            background-color: rgba(255, 255, 255, 0.5) !important; /* 浅白色选中背景 */
-            color: #000000 !important; /* 字体颜色保持黑色 */
-            font-weight: bold;
-        }
+/* 调整主内容区背景 */
+.eco-main {
+  background: transparent !important;
+  overflow: visible;
+}
+/* 修改主内容区背景 */
+.eco-main {
+  background: transparent !important;
+  backdrop-filter: none; /* 移除容器层模糊 */
+}
 
-    /* 主内容区域 */
-    .main-content {
-        padding: 20px;
-        margin-top: 64px; /* 头部高度 */
-        transition: margin-left 0.3s ease; /* 添加过渡效果 */
-        box-sizing: border-box; /* 确保 padding 不影响宽度计算 */
-    }
+/* 调整导航栏透明度 */
+.eco-aside {
+  background: rgba(245, 255, 240, 0.1) !important; 
+}
 
-    /* 底部 */
-    .footer {
-        background-color: #34495e;
-        color: white;
-        text-align: center;
-        padding: 10px;
-        font-size: 14px;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        z-index: 10;
-    }
-</style>    
+/* 添加全局背景层 */
+.eco-container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #f0f9eb 0%, #e6f7ff 100%);
+  z-index: -1;
+}
+
+.eco-container {
+  background: transparent !important;
+}
+
+.eco-main {
+  background: transparent !important; /* 移除白色背景 */
+}
+
+.glass-nav {
+  background: rgba(245, 255, 240, 0.85) !important; /* 调整透明度 */
+}
+</style>

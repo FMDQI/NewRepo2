@@ -191,11 +191,19 @@
 </template>
 
 <style scoped>
-    .normal-items-card {
+        .normal-items-card {
         margin-bottom: 20px;
-        transition: all 0.3s;
+        background: transparent !important;
     }
 
+    .normal-items-card .el-card__body {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 8px;
+  border: 1px solid rgba(103, 194, 58, 0.25);
+  box-shadow: 0 8px 32px rgba(103, 194, 58, 0.2);
+}
         .normal-items-card:hover {
             box-shadow: 0 2px 12px 0 rgba(0,0,0,0.1);
         }

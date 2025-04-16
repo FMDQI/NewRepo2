@@ -145,9 +145,37 @@
 </script>
 
 <style scoped>
-    .replenishment-card {
+/* 手动生成订单表单对齐 */
+.replenishment-card:last-child .el-form-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.replenishment-card:last-child .el-form-item__label {
+  text-align: right;
+  padding-right: 15px;
+}
+
+.replenishment-card:last-child .el-form-item__content {
+  max-width: 300px;
+}
+
+.replenishment-card {
         margin-bottom: 20px;
+        background: transparent !important;
     }
+
+    .replenishment-card .el-card__body {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 8px;
+  border: 1px solid rgba(103, 194, 58, 0.25);
+  box-shadow: 0 8px 32px rgba(103, 194, 58, 0.2);
+}
+   
 
     h2 {
         margin-bottom: 20px;

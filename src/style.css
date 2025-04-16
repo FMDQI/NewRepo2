@@ -1,77 +1,169 @@
+/* 生态科技主题 */
 :root {
-    font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.6;
-    font-weight: 400;
-    background-color: #7FFFD4; /* ����ɫ */
-    color: #2c3e50;
+  --eco-green: #67C23A;
+  --tech-blue: #58B2DC;
+  --glass-bg: rgba(255, 255, 255, 0.88);
+  --bg-gradient-1: #f0f9eb;
+  --bg-gradient-2: #e6f4ff;
 }
 
-a {
-    font-weight: 500;
-    color: #3498db;
-    text-decoration: none;
-}
-
-    a:hover {
-        color: #2980b9;
-    }
-
+/* 修改全局背景 */
 body {
-    margin: 0;
-    background-color: #7FFFD4 !important;
-    display: flex;
-    min-width: 320px;
-    min-height: 100vh;
+  background: url('/public/images/warehouse-bg.jpg') center/cover no-repeat fixed;
+  position: relative;
+  z-index: 0;
 }
 
-h1 {
-    font-size: 2.5em;
-    font-weight: bold;
+/* 调整遮罩层 */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(240, 249, 235, 0.15);
+  backdrop-filter: blur(8px);
+  z-index: 1;
 }
 
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: 1em;
-    font-weight: 500;
-    background-color: #3498db;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s;
+/* 调整毛玻璃效果 */
+.glass-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.3) !important;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(103, 194, 58, 0.15);
 }
 
-    button:hover {
-        background-color: #2980b9;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-/* ��Ƭʽ��� */
-.card {
-    padding: 1.5em;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+/* 添加背景层 */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #f0f9eb 0%, #e6f7ff 100%);
+  z-index: -1;
 }
 
-    .card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    }
-
-/* ����ǳɫģʽ */
-@media (prefers-color-scheme: light) {
-    :root {
-        background-color: #7FFFD4; /* ����ɫ */
-    }
+/* 调整头部渐变 */
+.eco-header {
+  background: linear-gradient(135deg, 
+    rgba(103, 194, 58, 0.15) 0%,
+    rgba(240, 249, 235, 0.98) 100%
+  ) !important;
 }
 
-    a:hover {
-        color: #3498db;
-    }
+/* 添加科技感光效 */
+body::before {
+  content: '';
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(103, 194, 58, 0.08) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  animation: glow 12s infinite linear;
+}
 
-    button {
-        background-color: #3498db;
-    }
+@keyframes glow {
+  0% { transform: translate(0, 0) }
+  25% { transform: translate(100px, 100px) }
+  50% { transform: translate(-50px, -80px) }
+  75% { transform: translate(-100px, 50px) }
+  100% { transform: translate(0, 0) }
+}
+
+/* 毛玻璃效果 */
+.glass-nav {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  background: var(--glass-bg) !important;
+  border-right: 1px solid rgba(103, 194, 58, 0.1) !important;
+}
+
+/* 修改毛玻璃卡片效果 */
+/* 移除卡片容器样式 */
+.glass-content {
+  background: transparent !important;
+  backdrop-filter: none;
+}
+
+/* 强化卡片内容区域毛玻璃效果 */
+.el-card__body {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 卡片整体样式调整 */
+/* 全局卡片毛玻璃效果 */
+.el-card {
+  background: transparent !important;
+  border: 1px solid rgba(103, 194, 58, 0.25);
+  box-shadow: 0 8px 32px rgba(103, 194, 58, 0.2);
+  overflow: hidden;
+}
+
+.el-card__body {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 调整遮罩层 */
+body::after {
+  z-index: -1;
+  backdrop-filter: blur(10px);
+}
+
+/* 确保背景层可见 */
+body::after {
+  z-index: -1; /* 降低遮罩层层级 */
+}
+
+/* 调整主容器 */
+.eco-main {
+  background: transparent !important;
+  overflow: visible;
+}
+
+/* 动态过渡 */
+.eco-nav {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.eco-nav.collapsed {
+  transform: translateX(-100%);
+}
+
+/* 科技感按钮 */
+.nav-toggle {
+  transition: all 0.3s !important;
+  background: var(--eco-green) !important;
+  color: white !important;
+  box-shadow: 0 4px 12px rgba(103, 194, 58, 0.3) !important;
+}
+.nav-toggle:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+/* 生态绿渐变标题 */
+.app-title {
+  background: linear-gradient(45deg, var(--eco-green), var(--tech-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

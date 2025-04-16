@@ -71,6 +71,36 @@
     .login-card {
         width: 400px;
         padding: 20px;
-        margin: 0 auto; /* 水平居中 */
+        margin: 0 auto;
+    }
+
+    /* 调整表单对齐 */
+    .el-form-item {
+        display: grid;
+        grid-template-columns: 80px 1fr; /* 两列网格布局 */
+        align-items: center;
+        margin-bottom: 22px;
+    }
+
+    .el-form-item__label {
+        grid-column: 1;
+        text-align: right;
+        padding-right: 12px;
+    }
+
+    .el-form-item__content {
+        grid-column: 2;
+        width: 100%;
+    }
+
+    .el-input {
+        width: 100%;
+        max-width: 280px; /* 控制输入框最大宽度 */
+    }
+
+    /* 登录按钮对齐调整 */
+    .el-form-item:last-child .el-form-item__content {
+        display: flex;
+        justify-content: flex-end;
     }
 </style>
